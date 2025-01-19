@@ -5,7 +5,7 @@
 
   vars:
    source_file: /Users/vvoloshyn/AeroFS/08_Projects/ansible/CustomData/user_custom-data1_debian.sh
-   destin_file: ~/user_custom-data_debian.sh
+   destin_file: ~/user_custom-data1_debian.sh
 
   tasks:
  
