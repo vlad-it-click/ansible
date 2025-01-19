@@ -16,4 +16,5 @@ cat <<EOF > /var/www/html/index.html
 </html>
 EOF
 
-sudo service nginx start
+#sudo service nginx start
+
