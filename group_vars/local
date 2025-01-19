@@ -1,0 +1,5 @@
+---
+
+ansible_user                  : nimda
+ansible_ssh_port              : 22 
+ansible_ssh_private_key_file  : /Users/vvoloshyn/.ssh/id_ed25519

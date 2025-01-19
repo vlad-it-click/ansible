@@ -1,0 +1,64 @@
+---
+- name  :  Install apache and webpage
+  #hosts :  jenk, jenkins04
+  hosts :  jenk
+  become:  yes
+
+
+  vars:
+     source_file: ./MyWebsite/index.html
+     destin_file: /var/www/html
+
+  tasks:
+
+  - name: Check the server OS Family
+    debug:
+      var: ansible_os_family
+
+  - block:    # DEBIAN LINUX
+    - name: Update apt-get repo and cache
+      apt: 
+         update_cache: yes 
+         force_apt_get: yes 
+         cache_valid_time: 3600
+  
+    - name: Install Apache web server
+      apt:  
+         name: apache2  
+         state: latest
+  
+    - name: Copy MyWebsite to Server
+      copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+      notify: RestartApacheDebian
+
+    - name: Start Apache and enable it
+      service: name=apache2 state=started enabled=yes
+    
+    when: ansible_os_family == "Debian"
+
+  - block:    # RedHat LINUX
+    - name: Yum Update 
+      yum: 
+         update_cache: yes 
+  
+    - name: Install Apache web server
+      yum:  
+         name: httpd  
+         state: latest
+  
+    - name: Copy MyWebsite to Server
+      copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+      notify: RestartApacheRedHat
+
+    - name: Start Apache and enable it
+      service: name=httpd state=started enabled=yes
+    
+    when: ansible_os_family == "RedHat"
+
+
+  handlers:
+  - name: RestartApacheDebian
+    service: name=apache2 state=restarted
+
+  - name: RestartApacheRedHat
+    service: name=httpd state=restarted

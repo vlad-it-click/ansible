@@ -1,0 +1,4 @@
+---
+
+ansible_ssh_port: 2222
+ansible_user    : vladvoloshyn

@@ -1,0 +1,16 @@
+---
+- name  :  Variables
+  hosts :  pi
+  become:  no 
+  vars_files:
+    - variables.yml
+  vars:
+    variable2: "PlaybookValue"
+
+  tasks:
+
+  - name: Variable1 Value 
+    debug: msg="Variable value is {{ variable1 }}"
+  
+  - name: Variable2 Value 
+    debug: msg="Variable value is {{ variable2 }}"

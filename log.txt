@@ -1,0 +1,2 @@
+This server jenk was deregistered from our Load Balancer, node name is kubejenkins
+This server jenk was deregistered from our Load Balancer, node name is kubejenkins

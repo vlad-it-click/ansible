@@ -1,0 +1,49 @@
+---
+- name: My ansible playbook
+  hosts: all 
+  become: yes
+
+  vars: 
+    mytext: "Hello, my friends!"
+
+  tasks:
+    - name: Ping test
+      ping:
+
+    - name: Unregister Server From Load Balacer
+      shell: echo This server {{ inventory_hostname }} was deregistered from our Load Balancer, node name is {{ ansible_nodename }} >> /home/log.txt 
+      delegate_to: 127.0.0.1
+
+    - name: Update my Database
+      shell: echo Write here your UPDATE DATABASE COMMAND...
+      run_once: true
+
+    - name: Create file1
+      copy:
+        dest: /home/file1.txt
+        content: |
+          This is FileN1
+          Some texet write here
+          An other text {{ mytext }} write here.
+      delegate_to: linux
+
+    - name: Create File2
+      copy: 
+        dest: /home/file2.txt
+        content: | 
+          This is FileN2
+          Some text write here
+          And some text {{ mytext }} write here.
+
+    - name: Reboot servers
+      shell: sleep 3 && reboot now
+      async: 1
+      poll: 0
+
+    - name: Wait till my servers will come up
+      wait_for:
+        host: "{{ inventory_hostname }}"
+        state: started
+        delay: 5
+        timeout: 40
+      delegate_to: 127.0.0.1

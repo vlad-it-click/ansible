@@ -1,0 +1,38 @@
+[wp]
+wpvisit    ansible_host=10.1.6.240 ansible_user=nimda
+orn        ansible_host=10.1.6.190 ansible_user=vladvoloshyn
+jenk       ansible_host=10.1.6.200 ansible_user=t32399sa owner=Vlad
+jenkins04  ansible_host=10.1.6.185 ansible_user=vladvoloshyn
+
+[infrastructure_old22]
+backup   ansible_host=10.1.6.14 ansible_user=vladvoloshyn
+backup2  ansible_host=10.1.6.35 ansible_user=vladvoloshyn 
+jumpbox  ansible_host=10.1.3.33 ansible_ssh_port=2222 
+syslog   ansible_host=10.1.6.33  
+wiki     ansible_host=10.1.6.30 
+
+[infrastructure_old2222]
+www         ansible_host=10.1.6.10
+snorby      ansible_host=10.1.6.38 
+dhcp        ansible_host=10.1.6.45
+itrac       ansible_host=10.1.6.53
+ldap        ansible_host=10.1.6.59
+proxypass   ansible_host=10.1.6.61
+jenkins02   ansible_host=10.1.6.89
+webmail     ansible_host=10.1.6.90
+localns1    ansible_host=10.1.7.7
+samba       ansible_host=10.1.5.250
+localns3    ansible_host=10.1.5.241
+
+[infrastructure_old:children]
+infrastructure_old22
+infrastructure_old2222
+
+[vpn]
+vpn2  ansible_host=10.1.22.5
+vpn3  ansible_host=10.1.22.6
+
+
+[local]
+pi    ansible_host=192.168.1.147 
+air   ansible_host=192.168.1.188 

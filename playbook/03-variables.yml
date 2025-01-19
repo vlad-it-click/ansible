@@ -1,0 +1,11 @@
+---
+- name  :  Variables
+  hosts :  pi
+  become:  no 
+  vars:
+    variable1: "PlaybookValue"
+
+  tasks:
+
+  - name: Variable Value 
+    debug: msg="Variable value is {{ variable1 }}"

@@ -1,0 +1,27 @@
+---
+- name  :  System Details 
+  hosts :  pi
+  become:  no 
+  #vars:
+  #  variable1: "PlaybookValue"
+
+  tasks:
+
+  - name: Kernel Information 
+    debug: msg="Kernel {{ ansible_kernel }}"
+
+
+  - name: Hostname Information 
+    debug: msg="Hostname is {{ ansible_hostname }}"
+
+  - name: Distribution  
+    debug: msg="Linux {{ ansible_distribution }}"
+
+#  - name: Groups
+#    debug: var=groups
+
+#  - name: Group Names
+#    debug: var=group_names
+
+#  - name: Similar to module setup
+#    debug: var=hostvars

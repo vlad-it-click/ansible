@@ -1,0 +1,12 @@
+---
+- name  :  Shell command execution
+  hosts :  pi
+  become:  no 
+
+
+  tasks:
+
+  - name: ShellCommands 
+    shell: uname -a 
+    register: uname_result
+  - debug: msg="uname output is  {{ uname_result.stdout }}"

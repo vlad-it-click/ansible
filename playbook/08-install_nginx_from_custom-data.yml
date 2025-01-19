@@ -1,0 +1,22 @@
+---
+- name  :  Install apache  
+  hosts :  air
+  become:  yes
+
+  vars:
+   source_file: /Users/vvoloshyn/AeroFS/08_Projects/Azure/user_custom-data_debian.sh
+   destin_file: ~/user_custom-data_debian.sh
+
+  tasks:
+ 
+  - name: Copy user_custom-datafile to server
+    copy: src={{ source_file }} dest={{ destin_file }} mode=0555
+
+  - name: execute user_custom-datafile on server
+    shell: "{{ destin_file }}"
+  - debug: msg="Executed {{ destin_file }}"
+    notify: Restart Apache
+
+  handlers:
+  - name: Restart Apache
+    service: name=nginx state=restarted

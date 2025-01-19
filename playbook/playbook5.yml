@@ -1,0 +1,8 @@
+---
+- name  :  Install apache and webpage
+  #hosts :  jenk, jenkins04
+  hosts :  jenk
+  become:  yes
+
+  roles:
+    - { role: deploy_apache_web, when: ansible_system == 'Linux' }

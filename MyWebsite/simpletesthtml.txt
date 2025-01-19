@@ -1,0 +1,20 @@
+cat <<EOF> index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title> My Page Title</title>
+</head>
+<body BGCOLOR=cyan>
+<hr>
+<a href="https://vlad-it.click">Link to the webpage</a>
+<h1>Header for My test page</h1>
+<h2>Medium Header for My test page </h2>
+Please contact me <a href="mailto:me.1.vams@xoxy.net"> myemail@address.com</a>.
+<p> This is a new paragraph!
+<p> <b>This is another paragraph!</b>
+<br> <b><i>This is a new sentence without a paragraph break, in bold italics.</i></b>
+<hr>
+</body>
+</html>
+EOF
+

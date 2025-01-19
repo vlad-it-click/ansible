@@ -1,0 +1,40 @@
+---
+- name  :  System Details 
+  hosts :  pi
+  become:  no 
+  vars:
+    system: "Linux"
+    color:  "Red"
+
+  tasks:
+    #- debug: var=hostvars 
+    - debug: var=ansible_system
+    - debug: var=color
+      when: system == 'Linux'
+
+    - debug: var=item
+      with_items:
+      - one_item
+      - second_item
+
+    - debug: var=item
+      with_items:
+      - name: Vlad
+        location:  Tottenham
+      - name: Vika
+        location:  Kamloops
+        
+ 
+
+#  - name: Kernel Information 
+#    debug: msg="Kernel {{ ansible_kernel }}"
+#  - name: Hostname Information 
+#    debug: msg="Hostname is {{ ansible_hostname }}"
+#  - name: Distribution  
+#    debug: msg="Linux {{ ansible_distribution }}"
+#  - name: Groups
+#    debug: var=groups
+#  - name: Group Names
+#    debug: var=group_names
+#  - name: Similar to module setup
+#    debug: var=hostvars

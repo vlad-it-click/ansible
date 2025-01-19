@@ -1,0 +1,1 @@
+It's a simple file for copy to remote machine using ansible ad-hoc commands.

@@ -1,0 +1,11 @@
+---
+- name  :  Test connections
+  hosts :  local
+  become:  no 
+
+
+  tasks:
+
+  - name: Ping my servers
+    action: ping
+  - debug: msg="Hi!"

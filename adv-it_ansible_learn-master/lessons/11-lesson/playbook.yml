@@ -1,0 +1,36 @@
+---
+- name: My Super Puper Playbook for Variables Lesson
+  hosts: all
+  become: yes
+
+  vars:
+    message1: Hello
+    message2: BestOfBest
+    secret: adfkjadslfjsdlfhsghpd
+
+  tasks:
+
+  - name: Print Secret variables
+    debug:
+      var: secret
+
+  - debug:
+      msg: "Secret word: {{ secret }}"
+
+  - debug:
+      msg: "Owner of this server is -->{{ owner }}<--"
+
+  - set_fact: 
+       other_message: "{{ message1 }} {{ message2 }} from {{ owner }}"
+
+  - debug:
+      var: other_message
+
+  - debug:
+      var: ansible_distribution 
+
+  - shell: uptime
+    register: results
+
+  - debug:
+      var: results.stdout

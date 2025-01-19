@@ -1,0 +1,59 @@
+---
+- name: Install Apache and Uplad my WEB PAGE
+  hosts: all 
+  become: yes
+
+  vars:
+    source_folder:  ./MyWebSite_2
+    destin_folder: /var/www/html
+
+  tasks:
+  - name: CHECK and Print LINUX Version
+    debug: 
+      var: ansible_os_family 
+
+  - block:  # DEBIAN #
+
+      - name: Install Apache Web Server for Debian
+        apt: name=apache2 state=latest
+
+      - name: Start WebServer and make it enable on boot for Debian 
+        service: name=apache2 state=started enabled=yes
+
+    when: ansible_os_family == "Debian"
+
+  - block:  # REDHAT #
+
+      - name: Install Apache Web Server for RedHat
+        yum: name=httpd state=latest
+
+      - name: Start WebServer and make it enable on boot
+        service: name=httpd state=started enabled=yes
+
+    when: ansible_os_family == "RedHat"
+
+      
+  - name: Copy MyHomePage to Servers
+    copy: src={{ item }} dest={{ destin_folder }} mode=0555
+    with_fileglob: "{{ source_folder }}/*.*"
+
+      #    loop:
+      #      - "index.html" 
+      #- "crazy.jpg"
+      #- "Sunrise.jpg"
+      #      - "Glacier.jpg"
+      #- "lake.jpg"
+    notify: 
+      - Restart Apache Debian
+      - Restart Apache RedHat 
+
+
+  handlers:
+  - name: Restart Apache Debian 
+    service: name=apache2 state=restarted
+    when: ansible_os_family == "Debian"
+
+  - name: Restart Apache RedHat
+    service: name=httpd state=restarted
+    when: ansible_os_family == "RedHat"
+      
