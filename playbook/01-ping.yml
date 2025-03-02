@@ -1,6 +1,6 @@
 ---
 - name  :  Test connections
-  hosts :  local
+  hosts :  vms
   become:  no 
 
 

@@ -1,6 +1,6 @@
 ---
 - name  :  Variables
-  hosts :  pi
+  hosts :  vms
   become:  no 
   vars:
     variable1: "PlaybookValue"
